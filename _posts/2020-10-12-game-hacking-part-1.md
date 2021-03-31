@@ -4,7 +4,7 @@ title:  "Game Hacking Part I"
 summary: "Hack a Unity game by patching the source"
 author: trigleos
 date: '2020-10-12 20:00:00 +0200'
-category: ['C#','Reversing', 'Windows Reversing']
+category: ['Csharp','Reversing', 'Windows_Reversing']
 tags: Windows Reversing, Reversing, C#
 thumbnail: /assets/img/posts/game-hacking-part-1/thumbnail.png
 keywords: .NET Reversing, Unity game patching, Reversing, C# Reversing
@@ -40,7 +40,7 @@ Diving into the game’s assemblies, we soon find the PlayerController class whi
 It’s a fairly easy function, and we clearly need to remove the call to Die() so our character isn’t killed when he falls to the bottom of the hole. So let’s just replace it by a nice and simple print(“Hello”)
 After making this change, we no longer die at the bottom of the hole and we can easily walk to the first flag
 
-![csharp](/assets/img/posts/game-hacking-part-1/flag.png)
+![flag](/assets/img/posts/game-hacking-part-1/flag.png)
 
 But now that we have it, how can we exit the cave? It’s time for another hack
 

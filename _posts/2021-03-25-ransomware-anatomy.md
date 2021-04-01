@@ -1,7 +1,7 @@
 ---
 layout: post
 title:  "Anatomy of a ransomware attack"
-summary: "Analyze a ransomware attack though network traffic"
+summary: "Analyze a ransomware attack through network traffic"
 author: trigleos
 date: '2021-03-25 20:00:00 +0200'
 category: ['Networking','Threat_Hunting','Forensics']
@@ -13,7 +13,7 @@ permalink: /blog/ransomware-anatomy/
 ---
 # Art Gallery
 ## TL;DR
-Analyze a ransomware attack though network traffic
+Analyze a ransomware attack through network traffic
 ## Description
 This was a Forensics challenge from the DaVinciCTF, where my team irNoobs managed to finish on the 4th place. This challenge particularly was extremely interesting as it closely mirrored an investigation of a ransomware attack, from the initial infection vector to the encryption routine.
 

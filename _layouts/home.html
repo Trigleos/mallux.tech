@@ -1,7 +1,7 @@
 ---
 layout: default
 ---
-
+<link rel="stylesheet" href="{{site.url}}{{site.baseurl}}/assets/css/termynal.css">
 <script>
   $(document).ready(function() {
     $("#typewriteText").typewrite({
@@ -12,7 +12,15 @@ layout: default
     <div class="jumbotron" style="text-align: center;">
       <img class="author-profile-img" src="{{site.url}}{{site.baseurl}}/assets/img/profile.png" />
       <p class="jumbotron-heading">Hi, I am Trigleos !</p>
-      <p class="lead" id="typewriteText"></p>
+      <!--<p class="lead" id="typewriteText"></p>-->
+      <div id="termynal" data-termynal>
+      	<span data-ty="input">sudo apt install netcat</span>
+    	<span data-ty="progress"></span>
+    	<span data-ty>Successfully installed netcat</span>
+    	<span data-ty="input">python3 -c 'print("A"*0x50 + "\xAB\xAD\x1D\xEA")' | netcat mallux.tech 1337</span>
+    	<span data-ty>mallux{dO'n7_7RY_7H12_@_Home}</span>
+      </div>
+      <script src="{{site.url}}{{site.baseurl}}/assets/js/termynal.js" data-termynal-container="#termynal"></script>
     </div>
     <div class="col-lg-8 offset-md-2">
       <section id="recent-articles">

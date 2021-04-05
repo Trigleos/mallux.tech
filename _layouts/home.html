@@ -15,10 +15,10 @@ layout: default
       <!--<p class="lead" id="typewriteText"></p>-->
       <div id="termynal" data-termynal>
       	<span data-ty="input">sudo apt install netcat</span>
-    	<span data-ty="progress"></span>
+    	<span data-ty="progress" data-ty-progressPercent="60"></span>
     	<span data-ty>Successfully installed netcat</span>
     	<span data-ty="input">python3 -c 'print("A"*0x50 + "\xAB\xAD\x1D\xEA")' | netcat mallux.tech 1337</span>
-    	<span data-ty>mallux{dO'n7_7RY_7H12_@_Home}</span>
+    	<span data-ty>flag{dOn7_7RY_7H12_@_Home}</span>
       </div>
       <script src="{{site.url}}{{site.baseurl}}/assets/js/termynal.js" data-termynal-container="#termynal"></script>
     </div>

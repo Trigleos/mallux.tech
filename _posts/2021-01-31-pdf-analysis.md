@@ -118,8 +118,9 @@ Doing this, we soon come across the following two streams:
 /Length 100
 /Filter /FlateDecode
 \>>stream
-xﾜ
-ￋA@0F￡}O￱￫ￆￊￊ    ﾈX;aﾚNﾌNﾣ#￡￶ﾺ~￟sﾙsNￅ6dﾕ/ﾰﾐﾤ(￶H￻ } kￗEﾻdﾅfcMﾍk￸￴i￫ﾗﾈﾘￂ~}ￕ\ﾰL3￟ￅ￷ￛﾅ!ￛ
+.
+.
+.
 endstream
 endobj
 4919 1 obj

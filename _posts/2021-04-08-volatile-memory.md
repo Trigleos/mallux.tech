@@ -336,7 +336,10 @@ REG_BINARY    UserPasswordHint : (S)
 After parsing this Unicode string to ASCII, we get **"it's easy to get, all you have to do is crack it, md5 3chars+4numbers+you_rule_here"**. Now we have all the information we need to crack the hash so let's fire up hashcat.
 ## Cracking the password
 Hashcat is a great tool to crack hashes. In this case, we can use a mask attack. The exact command we have to use is:
-**hashcat -m 0 md5_hash -a3 ?l?l?l?d?d?d?dyou_rule_here** and save the md5 hash **a3af05e30feb0ceec23359a2204e2991** in the md5_hash file. Running this will give us the original password,**sba2020you_rule_here** you may need to use the --force option, but check the result if you do use it. In our case, running **echo -n "sba2021you_rule_here" | md5sum** gives us the md5 hash we were looking for so we know that the password is correct. Using this password, we can finally open the malmalmal.zip file and extract the keylogger output file. Opening it, we can find the following text:
+
+**hashcat -m 0 md5_hash -a3 ?l?l?l?d?d?d?dyou_rule_here** 
+
+and save the md5 hash **a3af05e30feb0ceec23359a2204e2991** in the md5_hash file. Running this will give us the original password **sba2020you_rule_here**. You may need to use the --force option, but check the result if you do use it. In our case, running **echo -n "sba2021you_rule_here" | md5sum** gives us the md5 hash we were looking for so we know that the password is correct. Using this password, we can finally open the malmalmal.zip file and extract the keylogger output file. Opening it, we can find the following text:
 ```
 Key.shift H e l l o Key.space s i r , Key.enter Key.shift I Key.space h a v e Key.space c h a n g e d Key.space t h e Key.space p w d Key.space o f Key.space t h e Key.space k p Key.space b e c a s u Key.backspace Key.backspace u s e Key.space i Key.space t h n k Key.space i "" m Key.space u n d e r Key.space a t t a c k , Key.space t h e Key.space n e w Key.space p w d Key.space i s Key.space : Key.space Key.enter <104> Key.shift z n q Key.shift w <99> Key.shift h Key.shift o Key.shift c Key.shift d f Key.shift m <101> Key.backspace <102> Key.shift w i u q à Key.backspace q Key.backspace a Key.shift o Key.shift b Key.enter Key.shift B e s t Key.space r e g a r d s , Key.enter Key.shift S e m a h Key.shift B A Key.esc 
 ```

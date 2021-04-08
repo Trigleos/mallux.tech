@@ -46,7 +46,7 @@ Author: **_SemahBA_**
 
 First of all, this file is quite big, more precisely 2 Gigabytes after extracting it. Volatility will scan through this file which means that it might take some time if your PC is a bit slower. 
 The first thing you need to do is to determine from which OS this dump is coming from. You might already know this but if you don't, you need to ask volatility to determine the OS for you. The command to do this is **volatility -f memory.raw imageinfo**.
-If we run this the output we get is:
+If we run this, the output we get is:
 ```
 Volatility Foundation Volatility Framework 2.6
 INFO    : volatility.debug    : Determining profile based on KDBG search...
@@ -64,10 +64,10 @@ INFO    : volatility.debug    : Determining profile based on KDBG search...
      Image local date and time : 2021-03-16 12:19:09 +0100
 
 ```
-This already gives us some important intel. It shows us that the image has probably been taken on the 16th of March and it's also most certainly a Windows 7 image. We'll use the Win7SP1x64 image for further commands.
+This already gives us some important intel. It shows us that the image has probably been taken on the 16th of March and it's also most certainly a Windows 7 image. We'll use the Win7SP1x64 profile for further commands.
 ## Analyzing command history and processes
-Now that we know what the OS is, we can go on and look deeper into the image. The first thing we should always do is look at the running processes. Volatility has the pslist plugin for that. Thus, the command is **volatility -f memory.raw --profile=Win7SP1x64 pslist**.
-This spits out a lot of information. Normally you would look here for suspicious processes. In our case we only have one process that is out of the ordinary:
+Now that we know what the OS is, we can go on and look deeper into the image. The first thing we should always do is examine the running processes. Volatility has the pslist plugin for that. Thus, the command is **volatility -f memory.raw --profile=Win7SP1x64 pslist**.
+This spits out a lot of information. Normally you would search here for suspicious processes. In our case we only have one process that is out of the ordinary:
 ```
 0xfffffa8003682060 DumpIt.exe             4080   1000      2       45      1      1 2021-03-16 11:19:06 UTC+0000
 ```
@@ -114,7 +114,7 @@ Cmd #16 @ 0xbdf50: ♀
 
 **volatility -f memory.raw --profile=Win7SP1x64 consoles**
 	
-This command returns a lot of output, so I shortened it to the important parts
+This command returns a lot of output, so I shortened it to the important parts:
 	
 ```                                                                                            
 C:\Users\Semah\Desktop>dir                                                                                           
@@ -157,7 +157,7 @@ DumpIt.exe pid:   4080
 Command line : "C:\Users\Semah\Desktop\DumpIt.exe"
 ************************************************************************
 ```
-So let's summarize what we have found here.  The information from cmdline and consoles tells us that someone tried to run env. env is a Unix command that shows Environment Variables. This will be important for later on. Secondly, the user has some interesting files in his Documents directory, **secret.rar** and **mal.py.py** We will extract and analyze those in the next step
+So let's summarize what we have found here.  The information from cmdline and consoles tells us that someone tried to run env. env is a Unix command that shows Environment Variables. This will be important later on. Secondly, the user has some interesting files in his Documents directory, **secret.rar** and **mal.py.py**. We will extract and analyze those in the next step.
 ## Extracting and analyzing files
 
 In order to extract files from a memory dump, we need two volatility plugins. First of all, we need to let volatility carve out the files. The **filescan** plugin can be used for that. This plugin is very verbose so it's a good idea to save its output to a file so we can later search through that file:
@@ -255,7 +255,7 @@ Administrator:500:aad3b435b51404eeaad3b435b51404ee:31d6cfe0d16ae931b73c59d7e0c08
 Guest:501:aad3b435b51404eeaad3b435b51404ee:31d6cfe0d16ae931b73c59d7e0c089c0:::
 Semah:1000:aad3b435b51404eeaad3b435b51404ee:89d3c09ac96c6fb3e18cf97b5462eb7a:::
 ```
-We can now try to crack the NTLM hash 89d3c09ac96c6fb3e18cf97b5462eb7a online on crackstation.net or  using hashcat but there's an easier way to do this. There's an external mimikatz plugin for volatility. Mimikatz is infamous as a tool that is oftenly used by threat actors to extract passwords out of memory and use them for lateral movement. In our case, it can help us to recover the current password. You can get the plugin from [github](https://github.com/volatilityfoundation/community/blob/master/FrancescoPicasso/mimikatz.py)
+We can now try to crack the NTLM hash 89d3c09ac96c6fb3e18cf97b5462eb7a online on crackstation.net or  using hashcat but there's an easier way to do this. There's an external mimikatz plugin for volatility. Mimikatz is infamous as a tool that is often used by threat actors to extract passwords out of memory and use them for lateral movement. In our case, it can help us to recover the current password. You can get the plugin from [github](https://github.com/volatilityfoundation/community/blob/master/FrancescoPicasso/mimikatz.py).
 The command we need to run is:
 
 **volatility -f memory.raw --profile=Win7SP1x64 mimikatz**
@@ -358,7 +358,9 @@ So now we also have the master password for the KeePass file. Opening it, we get
 So the user has saved a password for a paste which is **LQlhH481mqpAor4Faroi**. The last thing we need is a URL where we can use this password. We're slowly getting to the end.
 ## Copying from clipboard
 One thing we haven't looked at yet is the clipboard and volatility of course has a plugin to analyze its content as well that is called **clipboard**. The command we'll use is:
+
 **volatility -f memory.raw --profile=Win7SP1x64 clipboard -v**
+
 It gives us amongst other things the following memory dump:
 ```
          1 ------------- ------------------           0x2002e7 0xfffff900c1b1b860
